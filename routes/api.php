@@ -3,9 +3,9 @@
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/auth/register', Controllers\Auth\RegisterController::class);
+Route::post('auth/register', Controllers\Auth\RegisterController::class);
 
-Route::post('/auth/login', Controllers\Auth\LoginController::class);
+Route::post('auth/login', Controllers\Auth\LoginController::class);
 
 // Route::get('/auth/refresh', Controllers\Auth\RefreshTokenController::class)->middleware('auth:api');
 

@@ -12,7 +12,7 @@ class RegisterController extends Controller
     public function __invoke(RegisterRequest $request, AuthContract $authContract): JsonResponse
     {
         $response = $authContract->register($request->only([
-            'name', 'email', 'password'
+            'name', 'email', 'password',
         ]));
 
         return $this->respondWithSuccess(

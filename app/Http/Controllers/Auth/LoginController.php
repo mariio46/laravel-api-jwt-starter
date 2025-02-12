@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function __invoke(LoginRequest $request, AuthContract $authContract): JsonResponse
     {
         $response = $authContract->login($request->only([
-            'email', 'password'
+            'email', 'password',
         ]));
 
         return $this->respondWithSuccess(

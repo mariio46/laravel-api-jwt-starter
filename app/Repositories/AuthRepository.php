@@ -12,7 +12,7 @@ class AuthRepository implements AuthContract
 {
     public function __construct(protected User $user)
     {
-        // 
+        //
     }
 
     public function register(array $data): array
@@ -33,7 +33,7 @@ class AuthRepository implements AuthContract
 
     public function login(array $data): array
     {
-        if (!$token = Auth::claims(['email' => $data['email']])->attempt($data)) {
+        if (! $token = Auth::claims(['email' => $data['email']])->attempt($data)) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
@@ -43,7 +43,7 @@ class AuthRepository implements AuthContract
             data: [
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => Auth::factory()->getTTL() * 300
+                'expires_in' => Auth::factory()->getTTL() * 300,
             ],
             message: 'Login successfully.'
         );

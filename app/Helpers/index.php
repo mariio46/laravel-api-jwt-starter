@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('firstWord')) {
+if (! function_exists('firstWord')) {
     /**
      * Take first word from passed value
      *
@@ -15,7 +15,7 @@ if (!function_exists('firstWord')) {
     }
 }
 
-if (!function_exists('firstLetter')) {
+if (! function_exists('firstLetter')) {
     /**
      * Take first letter from passed value
      *
@@ -30,7 +30,7 @@ if (!function_exists('firstLetter')) {
     }
 }
 
-if (!function_exists('generateUsername')) {
+if (! function_exists('generateUsername')) {
     /**
      * Take first letter from passed value
      *
@@ -47,7 +47,7 @@ if (!function_exists('generateUsername')) {
     }
 }
 
-if (!function_exists('generateSlug')) {
+if (! function_exists('generateSlug')) {
     /**
      * Take first letter from passed value
      *
@@ -64,7 +64,7 @@ if (!function_exists('generateSlug')) {
     }
 }
 
-if (!function_exists('sendFile')) {
+if (! function_exists('sendFile')) {
     /**
      * Send file to business logic
      *
@@ -81,7 +81,7 @@ if (!function_exists('sendFile')) {
     }
 }
 
-if (!function_exists('sendSuccessData')) {
+if (! function_exists('sendSuccessData')) {
     function sendSuccessData(mixed $data = null, ?string $message = 'Success'): array
     {
         if ($data != null) {
@@ -97,7 +97,7 @@ if (!function_exists('sendSuccessData')) {
     }
 }
 
-if (!function_exists('sendFailedData')) {
+if (! function_exists('sendFailedData')) {
     function sendFailedData(mixed $data = null, ?string $message = 'Failed'): array
     {
         $result = [
