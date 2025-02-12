@@ -14,7 +14,7 @@ class AuthenticatedUserController extends Controller
         return $this->respondWithSuccess(
             contents: sendSuccessData(
                 data: [
-                    'user' => new AuthenticatedUserResource($request->user())
+                    'user' => new AuthenticatedUserResource($request->user()),
                 ],
                 message: 'User data retrieve successfully',
             )

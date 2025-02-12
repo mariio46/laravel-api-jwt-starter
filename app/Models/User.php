@@ -27,14 +27,6 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
     public function avatar(?int $size = 150): string
     {
         $hash = hash(algo: 'sha256', data: $this->email);
@@ -60,6 +52,14 @@ class User extends Authenticatable implements JWTSubject
         return [
             'email' => $this->email,
             'role' => $this->roles->first()->name,
+        ];
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
         ];
     }
 }

@@ -33,7 +33,7 @@ class AuthRepository implements AuthContract
 
     public function login(array $data): array
     {
-        if (!$token = Auth::attempt($data)) {
+        if (! $token = Auth::attempt($data)) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
