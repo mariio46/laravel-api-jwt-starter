@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\AuthContract;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthContract
