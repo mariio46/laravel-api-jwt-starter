@@ -9,18 +9,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthContract
 {
-    public function __construct(protected User $user, protected Builder $baseQuery)
+    public function __construct(protected User $user)
     {
-        $this->baseQuery = $this->user;
+        // 
     }
 
     public function register(array $data): array
     {
-        $this->baseQuery->create([
+        $user = $this->user->query()->create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->assignRole('registrant');
 
         return sendSuccessData(
             data: null,
