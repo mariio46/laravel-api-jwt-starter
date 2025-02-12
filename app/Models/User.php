@@ -27,6 +27,21 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    public function avatar(?int $size = 150): string
+    {
+        $hash = hash(algo: 'sha256', data: $this->email);
+
+        return "https://www.gravatar.com/avatar/{$hash}?s={$size}&d=mp";
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -43,13 +58,5 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
     }
 }
