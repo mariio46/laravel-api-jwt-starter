@@ -19,4 +19,9 @@ interface AuthContract
      * @return array{data:array{access_token:string,token_type:string,expires_in:int},message:string}
      */
     public function login(array $data): array;
+
+    /**
+     * Logout user
+     */
+    public function logout(): array;
 }

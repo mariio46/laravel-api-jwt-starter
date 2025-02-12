@@ -9,4 +9,4 @@ Route::post('auth/login', Controllers\Auth\LoginController::class);
 
 Route::get('/auth/user', Controllers\Auth\AuthenticatedUserController::class)->middleware('auth:api');
 
-// Route::delete('/auth/logout', Controllers\Auth\LogoutController::class)->middleware('auth:api');
+Route::delete('/auth/logout', Controllers\Auth\LogoutController::class)->middleware('auth:api');
