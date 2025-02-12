@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Contracts\AuthContract;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthRepository implements AuthContract
 {
@@ -26,6 +28,24 @@ class AuthRepository implements AuthContract
         return sendSuccessData(
             data: null,
             message: 'User has been created successfully.',
+        );
+    }
+
+    public function login(array $data): array
+    {
+        if (!$token = Auth::claims(['email' => $data['email']])->attempt($data)) {
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
+            ]);
+        }
+
+        return sendSuccessData(
+            data: [
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => Auth::factory()->getTTL() * 300
+            ],
+            message: 'Login successfully.'
         );
     }
 }
