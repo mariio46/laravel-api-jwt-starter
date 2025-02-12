@@ -40,11 +40,7 @@ class AuthRepository implements AuthContract
         }
 
         return sendSuccessData(
-            data: [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => Auth::factory()->getTTL() * 300,
-            ],
+            data: $this->getTokenConfig($token),
             message: 'Login successfully.'
         );
     }
@@ -57,5 +53,23 @@ class AuthRepository implements AuthContract
             data: null,
             message: 'Logout successfully.'
         );
+    }
+
+    public function refreshToken(): array
+    {
+        $token = Auth::refresh();
+
+        return sendSuccessData(
+            data: $this->getTokenConfig($token)
+        );
+    }
+
+    protected function getTokenConfig(string $token): array
+    {
+        return [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 300,
+        ];
     }
 }

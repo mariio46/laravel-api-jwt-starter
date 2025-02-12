@@ -5,7 +5,7 @@ namespace App\Contracts;
 interface AuthContract
 {
     /**
-     * Register new user
+     * Register new User
      *
      * @param  array{name:string,email:string,password:string}  $data
      * @return array{message:string}
@@ -13,7 +13,7 @@ interface AuthContract
     public function register(array $data): array;
 
     /**
-     * Login user
+     * Login User
      *
      * @param  array{email:string,password:string}  $data
      * @return array{data:array{access_token:string,token_type:string,expires_in:int},message:string}
@@ -21,7 +21,12 @@ interface AuthContract
     public function login(array $data): array;
 
     /**
-     * Logout user
+     * Refresh Auth User Token
+     */
+    public function refreshToken(): array;
+
+    /**
+     * Logout User
      */
     public function logout(): array;
 }
