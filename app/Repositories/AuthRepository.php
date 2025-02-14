@@ -6,6 +6,7 @@ use App\Contracts\AuthContract;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthRepository implements AuthContract
@@ -25,8 +26,10 @@ class AuthRepository implements AuthContract
 
         $user->assignRole('registrant');
 
+        $token = Auth::tokenById($user->id);
+
         return sendSuccessData(
-            data: null,
+            data: $this->getTokenConfig($token),
             message: 'User has been created successfully.',
         );
     }
