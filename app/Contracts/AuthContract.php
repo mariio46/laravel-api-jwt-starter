@@ -38,4 +38,13 @@ interface AuthContract
      * @return array{data:array{user:array{App\Models\User},authorization:array{access_token:string,token_type:string,expires_in:int}},message:string}
      */
     public function updateAccount(string $userId, array $data): array;
+
+    /**
+     * Update Password Authenticated User
+     *
+     * @param  string $userId
+     * @param  array{new_password:string}  $data
+     * @return array{message:string}
+     */
+    public function updatePassword(string $userId, array $data): array;
 }

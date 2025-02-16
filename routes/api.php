@@ -14,3 +14,5 @@ Route::get('auth/refresh', Controllers\Auth\RefreshTokenController::class)->midd
 Route::delete('auth/logout', Controllers\Auth\LogoutController::class)->middleware('auth:api');
 
 Route::patch('auth/update-account', Controllers\Auth\UpdateAccountController::class)->middleware('auth:api');
+
+Route::patch('auth/update-password', Controllers\Auth\UpdatePasswordController::class)->middleware('auth:api');

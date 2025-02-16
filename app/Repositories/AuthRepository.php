@@ -89,6 +89,20 @@ class AuthRepository implements AuthContract
         );
     }
 
+    public function updatePassword(string $userId, array $data): array
+    {
+        $user = $this->user->query()->where('id', '=', $userId)->firstOrFail();
+
+        $user->update([
+            'password' => Hash::make($data['new_password']),
+        ]);
+
+        return sendSuccessData(
+            data: null,
+            message: 'Your password has been updated successfully.'
+        );
+    }
+
     protected function getTokenConfig(string $token): array
     {
         return [
