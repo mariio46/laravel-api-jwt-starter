@@ -83,7 +83,7 @@ class AuthRepository implements AuthContract
         return sendSuccessData(
             data: [
                 'user' => new AuthenticatedUserResource($user),
-                'authorization' => $this->getTokenConfig($newToken)
+                'authorization' => $this->getTokenConfig($newToken),
             ],
             message: 'Your account has been updated successfully.'
         );

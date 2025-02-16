@@ -33,7 +33,6 @@ interface AuthContract
     /**
      * Update Account Authenticated User
      *
-     * @param  string $userId
      * @param  array{name:string,email:string}  $data
      * @return array{data:array{user:array{App\Models\User},authorization:array{access_token:string,token_type:string,expires_in:int}},message:string}
      */
@@ -42,7 +41,6 @@ interface AuthContract
     /**
      * Update Password Authenticated User
      *
-     * @param  string $userId
      * @param  array{new_password:string}  $data
      * @return array{message:string}
      */
