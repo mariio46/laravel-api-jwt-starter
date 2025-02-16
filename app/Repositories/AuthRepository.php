@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Contracts\AuthContract;
+use App\Http\Resources\Auth\AuthenticatedUserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthRepository implements AuthContract
@@ -64,6 +64,28 @@ class AuthRepository implements AuthContract
 
         return sendSuccessData(
             data: $this->getTokenConfig($token)
+        );
+    }
+
+    public function updateAccount(string $userId, array $data): array
+    {
+        $user = $this->user->query()->where('id', '=', $userId)->firstOrFail();
+
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+        ]);
+
+        Auth::invalidate();
+
+        $newToken = Auth::tokenById($user->id);
+
+        return sendSuccessData(
+            data: [
+                'user' => new AuthenticatedUserResource($user),
+                'authorization' => $this->getTokenConfig($newToken)
+            ],
+            message: 'Your account has been updated successfully.'
         );
     }
 

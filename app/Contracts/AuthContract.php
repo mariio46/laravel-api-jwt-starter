@@ -29,4 +29,13 @@ interface AuthContract
      * Logout User
      */
     public function logout(): array;
+
+    /**
+     * Update Account Authenticated User
+     *
+     * @param  string $userId
+     * @param  array{name:string,email:string}  $data
+     * @return array{data:array{user:array{App\Models\User},authorization:array{access_token:string,token_type:string,expires_in:int}},message:string}
+     */
+    public function updateAccount(string $userId, array $data): array;
 }
