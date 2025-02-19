@@ -45,4 +45,12 @@ interface AuthContract
      * @return array{message:string}
      */
     public function updatePassword(string $userId, array $data): array;
+
+    /**
+     * Delete Account Authenticated User
+     *
+     * @param  array{password:string}  $data
+     * @return array{message:string}
+     */
+    public function deleteAccount(string $userId, array $data): array;
 }

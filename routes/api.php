@@ -16,3 +16,5 @@ Route::delete('auth/logout', Controllers\Auth\LogoutController::class)->middlewa
 Route::patch('auth/update-account', Controllers\Auth\UpdateAccountController::class)->middleware('auth:api');
 
 Route::patch('auth/update-password', Controllers\Auth\UpdatePasswordController::class)->middleware('auth:api');
+
+Route::post('auth/delete-account', Controllers\Auth\DeleteAccountController::class)->middleware('auth:api');

@@ -103,6 +103,20 @@ class AuthRepository implements AuthContract
         );
     }
 
+    public function deleteAccount(string $userId, array $data): array
+    {
+        $user = $this->user->query()->where('id', '=', $userId)->firstOrFail();
+
+        Auth::invalidate();
+
+        $user->delete();
+
+        return sendSuccessData(
+            data: null,
+            message: 'Your account has been deleted successfully.'
+        );
+    }
+
     protected function getTokenConfig(string $token): array
     {
         return [
