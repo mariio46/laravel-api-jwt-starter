@@ -15,6 +15,12 @@ class RepositoryServiceProvider extends ServiceProvider
             abstract: Contracts\AuthContract::class,
             concrete: Repositories\AuthRepository::class,
         );
+
+        // User
+        $this->app->bind(
+            abstract: Contracts\UserContract::class,
+            concrete: Repositories\UserRepository::class,
+        );
     }
 
     public function boot(): void

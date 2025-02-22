@@ -18,3 +18,7 @@ Route::patch('auth/update-account', Controllers\Auth\UpdateAccountController::cl
 Route::patch('auth/update-password', Controllers\Auth\UpdatePasswordController::class)->middleware('auth:api');
 
 Route::post('auth/delete-account', Controllers\Auth\DeleteAccountController::class)->middleware('auth:api');
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('users', [Controllers\UserController::class, 'index']);
+});
