@@ -25,4 +25,11 @@ interface UserContract
      * @return array{message:string,data:array{user:App\Http\Resources\User\UserResource}}
      */
     public function getUser(string $userId): array;
+
+    /**
+     * Update User
+     * @param array{name:string,email:string,role:string} $data
+     * @return array{message:string}
+     */
+    public function updateUser(array $data, string $userId): array;
 }

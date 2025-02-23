@@ -70,6 +70,22 @@ class UserRepository implements UserContract
         );
     }
 
+    public function updateUser(array $data, string $userId): array
+    {
+        $user = $this->fetchById(id: $userId)->firstOrFail();
+
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+        ]);
+
+        $user->syncRoles($data['role']);
+
+        return sendSuccessData(
+            message: 'User has been updated successfully.'
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery->where('id', '=', $id);
