@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\UserContract;
+use App\Http\Requests\User\StoreUserRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,17 @@ class UserController extends Controller
 
         return $this->respondWithSuccess(
             contents: $response,
+        );
+    }
+
+    public function store(StoreUserRequest $request): JsonResponse
+    {
+        $response = $this->userContract->storeUser(
+            data: $request->only(['name', 'email', 'password', 'role']),
+        );
+
+        return $this->respondWithSuccess(
+            contents: $response
         );
     }
 }

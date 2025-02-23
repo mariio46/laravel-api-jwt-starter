@@ -5,7 +5,9 @@ namespace App\Repositories;
 use App\Contracts\UserContract;
 use App\Http\Resources\User\UserCollection;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserContract
 {
@@ -37,6 +39,23 @@ class UserRepository implements UserContract
         return sendSuccessData(
             data: new UserCollection($users),
             message: 'Users data retrieve successfully.'
+        );
+    }
+
+    public function storeUser(array $data): array
+    {
+        $user = $this->baseQuery->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        $user->markEmailAsVerified();
+
+        $user->assignRole($data['role']);
+
+        return sendSuccessData(
+            message: 'User has been created successfully.'
         );
     }
 

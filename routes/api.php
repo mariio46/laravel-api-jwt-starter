@@ -21,4 +21,5 @@ Route::post('auth/delete-account', Controllers\Auth\DeleteAccountController::cla
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('users', [Controllers\UserController::class, 'index']);
+    Route::post('users/store', [Controllers\UserController::class, 'store']);
 });
