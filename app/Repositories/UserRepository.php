@@ -86,6 +86,20 @@ class UserRepository implements UserContract
         );
     }
 
+    public function deleteUser(string $userId): array
+    {
+        $user = $this->fetchById(id: $userId)->firstOrFail();
+
+        $temporaryUserName = firstWord(value: $user->name, capitalize: true);
+
+        $user->roles()->detach();
+        $user->delete();
+
+        return sendSuccessData(
+            message: "User with name {$temporaryUserName} has been deleted successfully."
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery->where('id', '=', $id);

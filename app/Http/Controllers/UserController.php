@@ -58,4 +58,13 @@ class UserController extends Controller
             contents: $response
         );
     }
+
+    public function delete(string $id): JsonResponse
+    {
+        $response = $this->userContract->deleteUser(userId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response
+        );
+    }
 }

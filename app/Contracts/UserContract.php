@@ -20,7 +20,7 @@ interface UserContract
     public function storeUser(array $data): array;
 
     /**
-     * Get all users
+     * Get single user by id
      * @param string $userId
      * @return array{message:string,data:array{user:App\Http\Resources\User\UserResource}}
      */
@@ -32,4 +32,11 @@ interface UserContract
      * @return array{message:string}
      */
     public function updateUser(array $data, string $userId): array;
+
+    /**
+     * Delete User
+     * @param string $userId
+     * @return array{message:string}
+     */
+    public function deleteUser(string $userId): array;
 }
