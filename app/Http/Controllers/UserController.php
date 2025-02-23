@@ -32,6 +32,15 @@ class UserController extends Controller
             data: $request->only(['name', 'email', 'password', 'role']),
         );
 
+        return $this->respondCreated(
+            data: $response
+        );
+    }
+
+    public function show(string $id): JsonResponse
+    {
+        $response = $this->userContract->getUser(userId: $id);
+
         return $this->respondWithSuccess(
             contents: $response
         );

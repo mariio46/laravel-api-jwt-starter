@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\UserContract;
 use App\Http\Resources\User\UserCollection;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Builder;
@@ -56,6 +57,16 @@ class UserRepository implements UserContract
 
         return sendSuccessData(
             message: 'User has been created successfully.'
+        );
+    }
+
+    public function getUser(string $userId): array
+    {
+        $user = $this->fetchById(id: $userId)->firstOrFail();
+
+        return sendSuccessData(
+            data: ['user' => new UserResource($user->load(['roles:id,name']))],
+            message: 'User data retrieve successfully.'
         );
     }
 
