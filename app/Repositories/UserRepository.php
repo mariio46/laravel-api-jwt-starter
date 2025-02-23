@@ -6,13 +6,11 @@ use App\Contracts\UserContract;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserContract
 {
-
     public function __construct(protected User $user, protected Builder $baseQuery)
     {
         $this->baseQuery = $user->query();
@@ -24,11 +22,11 @@ class UserRepository implements UserContract
             ->where('id', '!=', $currentUserId)
             ->when(
                 value: $params['search'] ?? null,
-                callback: fn(Builder $query, string $value) => $query->where('name', 'like', '%' . $value . '%')
+                callback: fn (Builder $query, string $value) => $query->where('name', 'like', '%' . $value . '%')
             )
             ->when(
                 value: $params['role'] ?? null,
-                callback: fn(Builder $query, string $value) => $query->whereHas('roles', function ($q) use ($value) {
+                callback: fn (Builder $query, string $value) => $query->whereHas('roles', function ($q) use ($value) {
                     $q->where('name', '=', $value);
                 }),
             )

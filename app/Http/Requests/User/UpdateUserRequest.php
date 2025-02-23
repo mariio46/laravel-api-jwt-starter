@@ -20,7 +20,7 @@ class UpdateUserRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'email' => [
                 'required',
@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'role' => [
                 'required',
-                Rule::exists('roles', 'name')->where(fn(Builder $query) => $query->where('name', '!=', 'superadmin')),
+                Rule::exists('roles', 'name')->where(fn (Builder $query) => $query->where('name', '!=', 'superadmin')),
             ],
         ];
     }
