@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $response = $this->userContract->getUsers(
             currentUserId: $request->user()->id,
-            params: $request->only(['search', 'role'])
+            params: $request->only(['search', 'role', 'sort'])
         );
 
         return $this->respondWithSuccess(

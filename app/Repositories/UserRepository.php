@@ -30,8 +30,15 @@ class UserRepository implements UserContract
                     $q->where('name', '=', $value);
                 }),
             )
+            ->when(
+                value: $params['sort'] ?? null,
+                callback: function (Builder $query, string $value) {
+                    $operator = str($value)->explode('-');
+                    $query->orderBy($operator[0], $operator[1]);
+                },
+                default: fn (Builder $query) => $query->orderBy('id', 'desc')
+            )
             ->with(['roles:id,name'])
-            ->orderBy('id', 'desc')
             ->fastPaginate(10)
             ->appends($params);
 
