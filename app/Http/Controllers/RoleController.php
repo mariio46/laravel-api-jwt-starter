@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\RoleContract;
+use App\Http\Requests\Role\StoreRoleRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,17 @@ class RoleController extends Controller
 
         return $this->respondWithSuccess(
             contents: $response,
+        );
+    }
+
+    public function store(StoreRoleRequest $request): JsonResponse
+    {
+        $response = $this->roleContract->storeRole(
+            data: $request->only(['name']),
+        );
+
+        return $this->respondCreated(
+            data: $response
         );
     }
 

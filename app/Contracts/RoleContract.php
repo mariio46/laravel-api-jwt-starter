@@ -13,6 +13,14 @@ interface RoleContract
     public function getRoles(?array $params): array;
 
     /**
+     * Create role
+     *
+     * @param  array{name:string}  $data
+     * @return array{message:string}
+     */
+    public function storeRole(array $data): array;
+
+    /**
      * Get single role
      * 
      * @param string $roles

@@ -42,6 +42,17 @@ class RoleRepository implements RoleContract
         );
     }
 
+    public function storeRole(array $data): array
+    {
+        $this->baseQuery->create([
+            'name' => $data['name'],
+        ]);
+
+        return sendSuccessData(
+            message: 'Role has been created successfully.'
+        );
+    }
+
     public function getRole(string $roleId): array
     {
         $role = $this->fetchById($roleId)->firstOrFail()->loadCount(['users']);
