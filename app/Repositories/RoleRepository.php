@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Contracts\RoleContract;
+use App\Http\Resources\Role\RoleCollection;
+use App\Http\Resources\Role\RoleResource;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Models\Role;
 
@@ -34,17 +36,18 @@ class RoleRepository implements RoleContract
             ->appends($params);
 
         return sendSuccessData(
-            data: $roles,
+            data: new RoleCollection($roles),
             message: 'Roles data retrieve successfully.'
+
         );
     }
 
     public function getRole(string $roleId): array
     {
-        $role = $this->fetchById($roleId)->firstOrFail();
+        $role = $this->fetchById($roleId)->firstOrFail()->loadCount(['users']);
 
         return sendSuccessData(
-            data: ['role' => $role],
+            data: ['role' => new RoleResource($role)],
             message: 'Role data retrieve successfully',
         );
     }
