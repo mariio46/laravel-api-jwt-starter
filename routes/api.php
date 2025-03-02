@@ -21,3 +21,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('users/{user:id}/update', [Controllers\UserController::class, 'update']);
     Route::delete('users/{user:id}/delete', [Controllers\UserController::class, 'delete']);
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('roles', [Controllers\RoleController::class, 'index']);
+});
