@@ -24,4 +24,5 @@ Route::middleware(['auth:api'])->group(function () {
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('roles', [Controllers\RoleController::class, 'index']);
+    Route::get('roles/{role:id}', [Controllers\RoleController::class, 'show']);
 });

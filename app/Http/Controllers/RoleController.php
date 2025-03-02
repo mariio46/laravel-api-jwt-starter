@@ -23,4 +23,13 @@ class RoleController extends Controller
             contents: $response,
         );
     }
+
+    public function show(string $id): JsonResponse
+    {
+        $response = $this->roleContract->getRole(roleId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
 }

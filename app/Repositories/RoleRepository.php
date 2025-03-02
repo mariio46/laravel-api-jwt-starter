@@ -38,4 +38,21 @@ class RoleRepository implements RoleContract
             message: 'Roles data retrieve successfully.'
         );
     }
+
+    public function getRole(string $roleId): array
+    {
+        $role = $this->fetchById($roleId)->firstOrFail();
+
+        return sendSuccessData(
+            data: ['role' => $role],
+            message: 'Role data retrieve successfully',
+        );
+    }
+
+    protected function fetchById(string $id): Builder
+    {
+        return $this->baseQuery
+            ->where('id', '!=', 1)
+            ->where('id', '=', $id);
+    }
 }
