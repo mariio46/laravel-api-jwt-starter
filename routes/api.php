@@ -27,4 +27,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('roles/store', [Controllers\RoleController::class, 'store']);
     Route::get('roles/{role:id}', [Controllers\RoleController::class, 'show']);
     Route::put('roles/{role:id}/update', [Controllers\RoleController::class, 'update']);
+    Route::delete('roles/{role:id}/delete', [Controllers\RoleController::class, 'delete']);
 });

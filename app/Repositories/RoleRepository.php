@@ -76,6 +76,17 @@ class RoleRepository implements RoleContract
         );
     }
 
+    public function deleteRole(string $roleId): array
+    {
+        $role = $this->fetchById(id: $roleId)->firstOrFail();
+
+        $role->delete();
+
+        return sendSuccessData(
+            message: 'Role has been deleted successfully.'
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery

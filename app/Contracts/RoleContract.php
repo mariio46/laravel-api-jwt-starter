@@ -29,7 +29,7 @@ interface RoleContract
     public function getRole(string $roleId): array;
 
     /**
-     * Update Role
+     * Update role
      *
      * @param  array{name:string}  $data
      * @param string $roleId
@@ -37,4 +37,13 @@ interface RoleContract
      * @return array{message:string}
      */
     public function updateRole(array $data, string $roleId): array;
+
+    /**
+     * Delete role
+     *
+     * @param string $roleId
+     * 
+     * @return array{message:string}
+     */
+    public function deleteRole(string $roleId): array;
 }

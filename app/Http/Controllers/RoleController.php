@@ -57,4 +57,13 @@ class RoleController extends Controller
             contents: $response,
         );
     }
+
+    public function delete(string $id): JsonResponse
+    {
+        $response = $this->roleContract->deleteRole(roleId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
 }
