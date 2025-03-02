@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\RoleContract;
 use App\Http\Requests\Role\StoreRoleRequest;
+use App\Http\Requests\Role\UpdateRoleRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,18 @@ class RoleController extends Controller
     public function show(string $id): JsonResponse
     {
         $response = $this->roleContract->getRole(roleId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
+
+    public function update(UpdateRoleRequest $request, string $id): JsonResponse
+    {
+        $response = $this->roleContract->updateRole(
+            data: $request->only(['name']),
+            roleId: $id
+        );
 
         return $this->respondWithSuccess(
             contents: $response,

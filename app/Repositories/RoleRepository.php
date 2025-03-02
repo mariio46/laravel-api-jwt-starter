@@ -63,6 +63,19 @@ class RoleRepository implements RoleContract
         );
     }
 
+    public function updateRole(array $data, string $roleId): array
+    {
+        $role = $this->fetchById(id: $roleId)->firstOrFail();
+
+        $role->update([
+            'name' => $data['name'],
+        ]);
+
+        return sendSuccessData(
+            message: 'Role has been updated successfully.'
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery

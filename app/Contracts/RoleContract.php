@@ -27,4 +27,14 @@ interface RoleContract
      * @return array{message:string,data:Spatie\Permission\Models\Role::class}
      */
     public function getRole(string $roleId): array;
+
+    /**
+     * Update Role
+     *
+     * @param  array{name:string}  $data
+     * @param string $roleId
+     * 
+     * @return array{message:string}
+     */
+    public function updateRole(array $data, string $roleId): array;
 }
