@@ -21,7 +21,7 @@ class RoleRepository implements RoleContract
             ->where('id', '!=', 1)
             ->when(
                 value: $params['search'] ?? null,
-                callback: fn(Builder $query, string $value) => $query->where('name', 'like', "%{$value}%")
+                callback: fn (Builder $query, string $value) => $query->where('name', 'like', "%{$value}%")
             )
             ->when(
                 value: $params['sort'] ?? null,
@@ -29,7 +29,7 @@ class RoleRepository implements RoleContract
                     $operator = str($value)->explode('-');
                     $query->orderBy($operator[0], $operator[1]);
                 },
-                default: fn(Builder $query) => $query->orderBy('id', 'desc')
+                default: fn (Builder $query) => $query->orderBy('id', 'desc')
             )
             ->withCount(['users'])
             ->fastPaginate($params['size'] ?? 10)
