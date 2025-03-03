@@ -37,4 +37,15 @@ class PermissionRepository implements PermissionContract
             data: new PermissionCollection($permissions),
         );
     }
+
+    public function storePermission(array $data): array
+    {
+        $this->baseQuery->create([
+            'name' => $data['name']
+        ]);
+
+        return sendSuccessData(
+            message: 'Permission has been created successfully.'
+        );
+    }
 }

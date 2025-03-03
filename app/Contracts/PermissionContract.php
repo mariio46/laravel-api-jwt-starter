@@ -11,4 +11,12 @@ interface PermissionContract
      * @return array{message:string,data:Spatie\Permission\Models\Permission::class}
      */
     public function getPermissions(?array $params): array;
+
+    /**
+     * Create permission
+     *
+     * @param  array{name:string}  $data
+     * @return array{message:string}
+     */
+    public function storePermission(array $data): array;
 }
