@@ -27,6 +27,12 @@ class RepositoryServiceProvider extends ServiceProvider
             abstract: Contracts\RoleContract::class,
             concrete: Repositories\RoleRepository::class,
         );
+
+        // Permission
+        $this->app->bind(
+            abstract: Contracts\PermissionContract::class,
+            concrete: Repositories\PermissionRepository::class,
+        );
     }
 
     public function boot(): void

@@ -29,3 +29,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('roles/{role:id}/update', [Controllers\RoleController::class, 'update']);
     Route::delete('roles/{role:id}/delete', [Controllers\RoleController::class, 'delete']);
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('permissions', [Controllers\PermissionController::class, 'index']);
+});
