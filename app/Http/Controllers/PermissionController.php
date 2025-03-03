@@ -57,4 +57,15 @@ class PermissionController extends Controller
             contents: $response,
         );
     }
+
+    public function delete(string $id): JsonResponse
+    {
+        $response = $this->permissionContract->deletePermission(
+            permissionId: $id,
+        );
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
 }

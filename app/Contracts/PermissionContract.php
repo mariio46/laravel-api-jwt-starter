@@ -35,4 +35,12 @@ interface PermissionContract
      * @return array{message:string}
      */
     public function updatePermission(array $data, string $permissionId): array;
+
+    /**
+     * Delete permission
+     *
+     *
+     * @return array{message:string}
+     */
+    public function deletePermission(string $permissionId): array;
 }

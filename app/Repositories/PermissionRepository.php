@@ -73,6 +73,17 @@ class PermissionRepository implements PermissionContract
         );
     }
 
+    public function deletePermission(string $permissionId): array
+    {
+        $permission = $this->fetchById(id: $permissionId)->firstOrFail();
+
+        $permission->delete();
+
+        return sendSuccessData(
+            message: 'Permission has been deleted successfully.'
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery->where('id', '=', $id);

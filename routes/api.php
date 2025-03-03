@@ -35,4 +35,5 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('permissions/store', [Controllers\PermissionController::class, 'store']);
     Route::get('permissions/{permission:id}', [Controllers\PermissionController::class, 'show']);
     Route::put('permissions/{permission:id}/update', [Controllers\PermissionController::class, 'update']);
+    Route::delete('permissions/{permission:id}/delete', [Controllers\PermissionController::class, 'delete']);
 });
