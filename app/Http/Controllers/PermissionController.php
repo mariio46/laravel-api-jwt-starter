@@ -35,4 +35,13 @@ class PermissionController extends Controller
             data: $response,
         );
     }
+
+    public function show(string $id): JsonResponse
+    {
+        $response = $this->permissionContract->getPermission(permissionId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
 }

@@ -33,4 +33,5 @@ Route::middleware(['auth:api'])->group(function () {
 Route::middleware(['auth:api'])->group(function () {
     Route::get('permissions', [Controllers\PermissionController::class, 'index']);
     Route::post('permissions/store', [Controllers\PermissionController::class, 'store']);
+    Route::get('permissions/{permission:id}', [Controllers\PermissionController::class, 'show']);
 });

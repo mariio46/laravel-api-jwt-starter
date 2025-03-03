@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Contracts\PermissionContract;
 use App\Http\Resources\Permission\PermissionCollection;
+use App\Http\Resources\Permission\PermissionResource;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Models\Permission;
 
@@ -47,5 +48,20 @@ class PermissionRepository implements PermissionContract
         return sendSuccessData(
             message: 'Permission has been created successfully.'
         );
+    }
+
+    public function getPermission(string $permissionId): array
+    {
+        $permission = $this->fetchById(id: $permissionId)->firstOrFail();
+
+        return sendSuccessData(
+            message: 'Permission data retrieve successfully.',
+            data: new PermissionResource($permission),
+        );
+    }
+
+    protected function fetchById(string $id): Builder
+    {
+        return $this->baseQuery->where('id', '=', $id);
     }
 }
