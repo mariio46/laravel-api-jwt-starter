@@ -60,6 +60,19 @@ class PermissionRepository implements PermissionContract
         );
     }
 
+    public function updatePermission(array $data, string $permissionId): array
+    {
+        $permission = $this->fetchById(id: $permissionId)->firstOrFail();
+
+        $permission->update([
+            'name' => $data['name'],
+        ]);
+
+        return sendSuccessData(
+            message: 'Permission has been updated successfully.',
+        );
+    }
+
     protected function fetchById(string $id): Builder
     {
         return $this->baseQuery->where('id', '=', $id);

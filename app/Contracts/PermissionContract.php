@@ -27,4 +27,12 @@ interface PermissionContract
      * @return array{message:string,data:Spatie\Permission\Models\Permission::class}
      */
     public function getPermission(string $permissionId): array;
+
+    /**
+     * Update permission
+     *
+     * @param  array{name:string}  $data
+     * @return array{message:string}
+     */
+    public function updatePermission(array $data, string $permissionId): array;
 }
