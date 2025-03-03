@@ -20,7 +20,7 @@ class PermissionRepository implements PermissionContract
         $permissions = $this->baseQuery
             ->when(
                 value: $params['search'] ?? null,
-                callback: fn(Builder $query, string $value) => $query->where('name', 'like', "%{$value}%")
+                callback: fn (Builder $query, string $value) => $query->where('name', 'like', "%{$value}%")
             )
             ->when(
                 value: $params['sort'] ?? null,
@@ -28,7 +28,7 @@ class PermissionRepository implements PermissionContract
                     $operator = str($value)->explode('-');
                     $query->orderBy($operator[0], $operator[1]);
                 },
-                default: fn(Builder $query) => $query->orderBy('id', 'desc')
+                default: fn (Builder $query) => $query->orderBy('id', 'desc')
             )
             ->fastPaginate($params['size'] ?? 10)
             ->appends($params);
@@ -42,7 +42,7 @@ class PermissionRepository implements PermissionContract
     public function storePermission(array $data): array
     {
         $this->baseQuery->create([
-            'name' => $data['name']
+            'name' => $data['name'],
         ]);
 
         return sendSuccessData(
