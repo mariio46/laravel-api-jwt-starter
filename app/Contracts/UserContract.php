@@ -41,4 +41,11 @@ interface UserContract
      * @return array{message:string}
      */
     public function deleteUser(string $userId): array;
+
+    /**
+     * Revoke User Role
+     *
+     * @return array{message:string}
+     */
+    public function revokeUserRole(string $userId): array;
 }

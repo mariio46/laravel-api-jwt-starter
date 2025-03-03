@@ -20,6 +20,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('users/{user:id}', [Controllers\UserController::class, 'show']);
     Route::put('users/{user:id}/update', [Controllers\UserController::class, 'update']);
     Route::delete('users/{user:id}/delete', [Controllers\UserController::class, 'delete']);
+    Route::delete('users/{user:id}/revoke', [Controllers\UserController::class, 'revoke']);
 });
 
 Route::middleware(['auth:api'])->group(function () {

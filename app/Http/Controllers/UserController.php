@@ -67,4 +67,13 @@ class UserController extends Controller
             contents: $response
         );
     }
+
+    public function revoke(string $id): JsonResponse
+    {
+        $response = $this->userContract->revokeUserRole(userId: $id);
+
+        return $this->respondWithSuccess(
+            contents: $response,
+        );
+    }
 }

@@ -22,11 +22,11 @@ class UserRepository implements UserContract
             ->where('id', '!=', $currentUserId)
             ->when(
                 value: $params['search'] ?? null,
-                callback: fn (Builder $query, string $value) => $query->where('name', 'like', '%' . $value . '%')
+                callback: fn(Builder $query, string $value) => $query->where('name', 'like', '%' . $value . '%')
             )
             ->when(
                 value: $params['role'] ?? null,
-                callback: fn (Builder $query, string $value) => $query->whereHas('roles', function ($q) use ($value) {
+                callback: fn(Builder $query, string $value) => $query->whereHas('roles', function ($q) use ($value) {
                     $q->where('name', '=', $value);
                 }),
             )
@@ -36,7 +36,7 @@ class UserRepository implements UserContract
                     $operator = str($value)->explode('-');
                     $query->orderBy($operator[0], $operator[1]);
                 },
-                default: fn (Builder $query) => $query->orderBy('id', 'desc')
+                default: fn(Builder $query) => $query->orderBy('id', 'desc')
             )
             ->with(['roles:id,name'])
             ->fastPaginate(10)
@@ -102,6 +102,17 @@ class UserRepository implements UserContract
 
         return sendSuccessData(
             message: "User with name {$temporaryUserName} has been deleted successfully."
+        );
+    }
+
+    public function revokeUserRole(string $userId): array
+    {
+        $user  = $this->fetchById(id: $userId)->firstOrFail();
+
+        $user->roles()->detach();
+
+        return sendSuccessData(
+            message: "User role has been revoked successfully."
         );
     }
 
