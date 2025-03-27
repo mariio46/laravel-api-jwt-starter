@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        $users->each(fn ($user) => User::factory()->create($user));
+        $users->each(fn($user) => User::factory()->create($user));
 
         $this->call([
             RolePermissionSeeder::class,
         ]);
 
-        User::factory(100)->create()->each(fn ($user) => $user->assignRole('registrant'));
+        // User::factory(100)->create()->each(fn ($user) => $user->assignRole('registrant'));
     }
 }
